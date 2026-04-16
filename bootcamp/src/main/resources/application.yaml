@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: bootcamp
+  datasource:
+    url: jdbc:mysql://localhost:2750/testdb
+    username: root
+    password: myscpw
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+jwt:
+  secret: my-super-secret-key-min-32-characters-long
