@@ -19,8 +19,7 @@ public class TransactionController {
 
     @GetMapping
     public List<TransactionResponseDTO>getMyTransactions(@AuthenticationPrincipal CustomUserDetails userDetails){
-        Long id = userDetails.getId();
-        return transactionService.getMyTransactions(id);
+        return transactionService.getMyTransactions(userDetails.getId());
     }
     @PostMapping("/payment/{id}")
     public void payment(@AuthenticationPrincipal CustomUserDetails userDetails,

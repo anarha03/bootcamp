@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface PreparationService {
 
-    List<PreparationResponseDTO>getMyStudents(Long id);
+    List<PreparationResponseDTO>getMyPreparations(Long id);
 
-    void create(Long id, PreparationRequestDTO preparationRequestDTO);
+    void create(PreparationRequestDTO preparationRequestDTO);
 
     PreparationResponseDTO delete(Long teacherId, Long studentId);
 }

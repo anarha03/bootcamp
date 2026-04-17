@@ -15,31 +15,26 @@ import java.util.List;
 public class PreparationController {
     private final PreparationService preparationService;
 
-    public PreparationController( PreparationService preparationService) {
+    public PreparationController(PreparationService preparationService) {
         this.preparationService = preparationService;
     }
 
-    @GetMapping("/mypreparations")
+    @GetMapping("/myPreparations")
     public List<PreparationResponseDTO> getMyPreparations(@AuthenticationPrincipal CustomUserDetails userDetails) {
-        Long id = userDetails.getId();
-        return preparationService.getMyStudents(id);
+        return preparationService.getMyPreparations(userDetails.getId());
     }
 
     @PostMapping
     public void create(@AuthenticationPrincipal CustomUserDetails userDetails,
-                       @RequestBody PreparationRequestDTO preparationRequestDTO){
-        if (userDetails.getRole().equals(Role.STUDENT)){
-            throw new RuntimeException("You can not create Preparation!!");
-        }
-        preparationService.create(userDetails.getId(),preparationRequestDTO);
+                       @RequestBody PreparationRequestDTO preparationRequestDTO) {
+        preparationService.create(preparationRequestDTO);
     }
+
     @DeleteMapping("/{id}")
     public PreparationResponseDTO delete(@AuthenticationPrincipal CustomUserDetails userDetails,
-                                         @PathVariable Long id){
-        if (userDetails.getRole().equals(Role.STUDENT)){
-            throw new RuntimeException("You can not delete Preparation!!");
-        }
-        return preparationService.delete(userDetails.getId(),id);
+                                         @PathVariable Long id) {
+
+        return preparationService.delete(userDetails.getId(), id);
 
     }
 }

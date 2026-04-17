@@ -10,4 +10,6 @@ public interface PreparationRepository extends JpaRepository<Preparation, Long> 
     List<Preparation> findByTeacherId(Long teacherId);
 
     Optional<Preparation> findByTeacherIdAndStudentId(Long teacherId, Long studentId);
+
+    List<Preparation> findByStudentId(Long studentId);
 }
