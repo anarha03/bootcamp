@@ -32,7 +32,7 @@ public class SecurityConfiguration {
 
                         .requestMatchers("/auth/**").permitAll()
 
-//                        .requestMatchers(HttpMethod.POST, "/preparations").hasRole("TEACHER")
+                        .requestMatchers(HttpMethod.POST, "/preparations").hasRole("TEACHER")
                         .requestMatchers(HttpMethod.DELETE, "/preparations/**").hasRole("TEACHER")
 
                         .requestMatchers(HttpMethod.POST, "/transactions/payment/**").hasRole("STUDENT")
