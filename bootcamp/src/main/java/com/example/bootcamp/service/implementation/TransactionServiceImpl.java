@@ -2,6 +2,10 @@ package com.example.bootcamp.service.implementation;
 
 import com.example.bootcamp.dto.response.TransactionResponseDTO;
 import com.example.bootcamp.entity.*;
+import com.example.bootcamp.exception.types.HaveNotEnoughBalanceException;
+import com.example.bootcamp.exception.types.StudentNotFoundException;
+import com.example.bootcamp.exception.types.TeacherNotFoundException;
+import com.example.bootcamp.exception.types.UserNotFoundException;
 import com.example.bootcamp.repository.StudentRepository;
 import com.example.bootcamp.repository.TeacherRepository;
 import com.example.bootcamp.repository.TransactionRepository;
@@ -41,11 +45,11 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     @Transactional
     public void paymentToTeacher(Long id, Long teacherId, Double amount) {
-        Student student = studentRepository.findByUserId(id).orElseThrow(RuntimeException::new);
+        Student student = studentRepository.findByUserId(id).orElseThrow(StudentNotFoundException::new);
         if (student.getUser().getBalance() < amount) {
-            throw new RuntimeException("Balansinizda kifayet qeder vesait yoxdur!");
+            throw new HaveNotEnoughBalanceException("Balansinizda kifayet qeder vesait yoxdur!");
         }
-        Teacher teacher = teacherRepository.findById(teacherId).orElseThrow(RuntimeException::new);
+        Teacher teacher = teacherRepository.findById(teacherId).orElseThrow(TeacherNotFoundException::new);
         teacher.getUser().setBalance(teacher.getUser().getBalance() + amount);
         student.getUser().setBalance(student.getUser().getBalance() - amount);
         transactionRepository.save(Transaction.builder()
@@ -62,7 +66,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     @Transactional
     public void topUp(Long id, Double amount) {
-        User user = userRepository.findById(id).orElseThrow(RuntimeException::new);
+        User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
         user.setBalance(user.getBalance()+amount);
         Transaction topUp = Transaction.builder()
                 .amount(amount)
@@ -78,9 +82,9 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     @Transactional
     public void withdraw(Long id, Double amount) {
-        User user = userRepository.findById(id).orElseThrow(RuntimeException::new);
+        User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
         if (user.getBalance()<amount){
-            throw new RuntimeException();
+            throw new HaveNotEnoughBalanceException();
         }
         user.setBalance(user.getBalance()-amount);
         Transaction withdraw = Transaction.builder()

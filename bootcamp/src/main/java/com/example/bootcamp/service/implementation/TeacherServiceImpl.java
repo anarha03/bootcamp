@@ -4,6 +4,7 @@ import com.example.bootcamp.dto.request.TeacherRequestDTO;
 import com.example.bootcamp.dto.response.TeacherResponseDTO;
 import com.example.bootcamp.entity.Student;
 import com.example.bootcamp.entity.Teacher;
+import com.example.bootcamp.exception.types.TeacherNotFoundException;
 import com.example.bootcamp.mapper.TeacherMapper;
 import com.example.bootcamp.repository.TeacherRepository;
 import com.example.bootcamp.service.TeacherService;
@@ -32,7 +33,7 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public TeacherResponseDTO get(Long id) {
-        Teacher teacher = teacherRepository.findById(id).orElseThrow(RuntimeException::new);
+        Teacher teacher = teacherRepository.findById(id).orElseThrow(TeacherNotFoundException::new);
         return teacherMapper.entityToResponse(teacher);
     }
 
@@ -51,7 +52,7 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public TeacherResponseDTO delete(Long id) {
-        Teacher teacher = teacherRepository.findById(id).orElseThrow(RuntimeException::new);
+        Teacher teacher = teacherRepository.findById(id).orElseThrow(TeacherNotFoundException::new);
         teacherRepository.delete(teacher);
         return teacherMapper.entityToResponse(teacher);
     }

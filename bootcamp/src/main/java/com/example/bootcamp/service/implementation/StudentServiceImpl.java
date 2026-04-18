@@ -3,6 +3,7 @@ package com.example.bootcamp.service.implementation;
 import com.example.bootcamp.dto.request.StudentRequestDTO;
 import com.example.bootcamp.dto.response.StudentResponseDTO;
 import com.example.bootcamp.entity.Student;
+import com.example.bootcamp.exception.types.StudentNotFoundException;
 import com.example.bootcamp.mapper.StudentMapper;
 import com.example.bootcamp.repository.StudentRepository;
 import com.example.bootcamp.service.StudentService;
@@ -29,7 +30,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentResponseDTO get(Long id) {
-        Student student = studentRepository.findById(id).orElseThrow(RuntimeException::new);
+        Student student = studentRepository.findById(id).orElseThrow(StudentNotFoundException::new);
         return studentMapper.entityToResponse(student);
     }
 
@@ -49,7 +50,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentResponseDTO delete(Long id) {
-        Student student = studentRepository.findById(id).orElseThrow(RuntimeException::new);
+        Student student = studentRepository.findById(id).orElseThrow(StudentNotFoundException::new);
         studentRepository.delete(student);
         return studentMapper.entityToResponse(student);
     }
