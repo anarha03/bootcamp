@@ -16,7 +16,7 @@ public class TeacherController {
     public TeacherController(TeacherService teacherService){
         this.teacherService = teacherService;
     }
-    public final TeacherService teacherService;
+    private final TeacherService teacherService;
 
     @GetMapping
     List<TeacherResponseDTO> getAll(){

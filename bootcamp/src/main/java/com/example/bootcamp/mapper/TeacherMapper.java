@@ -13,5 +13,6 @@ public interface TeacherMapper {
     @Mapping(target = "user.id", ignore = true)
     @Mapping(target = "user.balance", ignore = true)
     Teacher requestToEntity(TeacherRequestDTO teacherRequestDTO);
-    TeacherResponseDTO entityToResponse (Teacher teacher);
+
+    TeacherResponseDTO entityToResponse(Teacher teacher);
 }

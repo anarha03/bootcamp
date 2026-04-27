@@ -11,8 +11,9 @@ import org.mapstruct.Mapping;
 public interface StudentMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "preparations", ignore = true)
-    @Mapping(target = "user.id",ignore=true)
-    @Mapping(target="user.balance",ignore=true)
+    @Mapping(target = "user.id", ignore = true)
+    @Mapping(target = "user.balance", ignore = true)
     Student requestToEntity(StudentRequestDTO studentRequestDTO);
-    StudentResponseDTO entityToResponse (Student student);
+
+    StudentResponseDTO entityToResponse(Student student);
 }

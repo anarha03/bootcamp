@@ -16,11 +16,12 @@ import com.example.bootcamp.service.PreparationService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class PreparationServiceImpl implements PreparationService {
-    public final PreparationRepository preparationRepository;
-    public final TeacherRepository teacherRepository;
-    public final PreparationMapper preparationMapper;
+    private final PreparationRepository preparationRepository;
+    private final TeacherRepository teacherRepository;
+    private final PreparationMapper preparationMapper;
     private final UserRepository userRepository;
     private final StudentRepository studentRepository;
 
@@ -36,11 +37,11 @@ public class PreparationServiceImpl implements PreparationService {
     @Override
     public List<PreparationResponseDTO> getMyPreparations(Long id) {
         User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-        if (user.getRole().equals(Role.TEACHER)){
-        Teacher teacher = teacherRepository.findByUserId(id).orElseThrow(TeacherNotFoundException::new);
-        List<Preparation> byTeacherId = preparationRepository.findByTeacherId(teacher.getId());
-        return byTeacherId.stream().map(preparationMapper::entityToResponse).toList();}
-        else {
+        if (user.getRole().equals(Role.TEACHER)) {
+            Teacher teacher = teacherRepository.findByUserId(id).orElseThrow(TeacherNotFoundException::new);
+            List<Preparation> byTeacherId = preparationRepository.findByTeacherId(teacher.getId());
+            return byTeacherId.stream().map(preparationMapper::entityToResponse).toList();
+        } else {
             Student student = studentRepository.findByUserId(id).orElseThrow(StudentNotFoundException::new);
             List<Preparation> byStudentId = preparationRepository.findByStudentId((student.getId()));
             return byStudentId.stream().map(preparationMapper::entityToResponse).toList();

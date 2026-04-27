@@ -22,10 +22,10 @@ import static com.example.bootcamp.entity.TransactionStatus.OUTCOME;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
-    public final TransactionRepository transactionRepository;
-    public final UserRepository userRepository;
-    public final StudentRepository studentRepository;
-    public final TeacherRepository teacherRepository;
+    private final TransactionRepository transactionRepository;
+    private final UserRepository userRepository;
+    private final StudentRepository studentRepository;
+    private final TeacherRepository teacherRepository;
 
     public TransactionServiceImpl(TransactionRepository transactionRepository, UserRepository userRepository, StudentRepository studentRepository, TeacherRepository teacherRepository) {
         this.transactionRepository = transactionRepository;
@@ -67,7 +67,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Transactional
     public void topUp(Long id, Double amount) {
         User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-        user.setBalance(user.getBalance()+amount);
+        user.setBalance(user.getBalance() + amount);
         Transaction topUp = Transaction.builder()
                 .amount(amount)
                 .receiver(user)
@@ -83,10 +83,10 @@ public class TransactionServiceImpl implements TransactionService {
     @Transactional
     public void withdraw(Long id, Double amount) {
         User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-        if (user.getBalance()<amount){
+        if (user.getBalance() < amount) {
             throw new HaveNotEnoughBalanceException();
         }
-        user.setBalance(user.getBalance()-amount);
+        user.setBalance(user.getBalance() - amount);
         Transaction withdraw = Transaction.builder()
                 .amount(amount)
                 .sender(user)
