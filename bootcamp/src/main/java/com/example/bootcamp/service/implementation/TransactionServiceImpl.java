@@ -44,8 +44,8 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     @Transactional
-    public void paymentToTeacher(Long id, Long teacherId, Double amount) {
-        Student student = studentRepository.findByUserId(id).orElseThrow(StudentNotFoundException::new);
+    public void paymentToTeacher(Long studentUserId, Long teacherId, Double amount) {
+        Student student = studentRepository.findByUserId(studentUserId).orElseThrow(StudentNotFoundException::new);
         if (student.getUser().getBalance() < amount) {
             throw new HaveNotEnoughBalanceException("Balansinizda kifayet qeder vesait yoxdur!");
         }
@@ -105,7 +105,10 @@ public class TransactionServiceImpl implements TransactionService {
 
         TransactionStatus status = isIncome ? INCOME : OUTCOME;
 
-        String description = isIncome
+        String receiver = !isIncome
+                ? (t.getSender() != null ? t.getSender().getEmail() : "Sistem")
+                : (t.getReceiver() != null ? t.getReceiver().getEmail() : "Sistem");
+        String sender = isIncome
                 ? (t.getSender() != null ? t.getSender().getEmail() : "Sistem")
                 : (t.getReceiver() != null ? t.getReceiver().getEmail() : "Sistem");
 
@@ -113,7 +116,8 @@ public class TransactionServiceImpl implements TransactionService {
                 .id(t.getId())
                 .amount(t.getAmount())
                 .transactionStatus(status)
-                .description(description)
+                .receiver(receiver)
+                .sender(sender)
                 .createdAt(t.getCreatedAt())
                 .build();
 

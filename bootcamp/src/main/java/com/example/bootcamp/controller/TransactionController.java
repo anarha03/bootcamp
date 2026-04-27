@@ -21,11 +21,11 @@ public class TransactionController {
     public List<TransactionResponseDTO>getMyTransactions(@AuthenticationPrincipal CustomUserDetails userDetails){
         return transactionService.getMyTransactions(userDetails.getId());
     }
-    @PostMapping("/payment/{id}")
+    @PostMapping("/payment/{teacherId}")
     public void payment(@AuthenticationPrincipal CustomUserDetails userDetails,
-                        @PathVariable Long id,
+                        @PathVariable Long teacherId,
                         @RequestParam Double amount){
-        transactionService.paymentToTeacher(userDetails.getId(),id,amount);
+        transactionService.paymentToTeacher(userDetails.getId(),teacherId,amount);
     }
     @PostMapping("/topUp")
     public void topUp(@AuthenticationPrincipal CustomUserDetails userDetails,
