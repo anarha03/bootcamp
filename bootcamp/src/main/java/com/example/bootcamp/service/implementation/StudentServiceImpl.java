@@ -44,8 +44,22 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentResponseDTO update(Long id, StudentRequestDTO studentRequestDTO) {
-        return null;
+    public StudentResponseDTO update(Long id, StudentRequestDTO dto) {
+        Student student = studentRepository.findById(id)
+                .orElseThrow(StudentNotFoundException::new);
+
+        student.setName(dto.getName());
+        student.setGrade(dto.getGrade());
+        student.setNumber(dto.getNumber());
+
+        if (dto.getUser() != null && dto.getUser().getPassword() != null) {
+            student.getUser().setPassword(
+                    passwordEncoder.encode(dto.getUser().getPassword())
+            );
+        }
+
+        studentRepository.save(student);
+        return studentMapper.entityToResponse(student);
     }
 
     @Override

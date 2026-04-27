@@ -46,8 +46,23 @@ public class TeacherServiceImpl implements TeacherService {
         teacherRepository.save(teacher);    }
 
     @Override
-    public TeacherResponseDTO update(Long id, TeacherRequestDTO teacherRequestDTO) {
-        return null;
+    public TeacherResponseDTO update(Long id, TeacherRequestDTO dto) {
+        Teacher teacher = teacherRepository.findById(id)
+                .orElseThrow(TeacherNotFoundException::new);
+
+        teacher.setName(dto.getName());
+        teacher.setSubject(dto.getSubject());
+        teacher.setPhoneNumber(dto.getPhoneNumber());
+        teacher.setBio(dto.getBio());
+
+        if (dto.getUser() != null && dto.getUser().getPassword() != null) {
+            teacher.getUser().setPassword(
+                    passwordEncoder.encode(dto.getUser().getPassword())
+            );
+        }
+
+        teacherRepository.save(teacher);
+        return teacherMapper.entityToResponse(teacher);
     }
 
     @Override
