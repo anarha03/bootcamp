@@ -1,8 +1,11 @@
 package com.example.bootcamp.controller;
 
 import com.example.bootcamp.dto.response.UserResponseDTO;
+import com.example.bootcamp.entity.ChangePasswordRequest;
 import com.example.bootcamp.entity.security.CustomUserDetails;
 import com.example.bootcamp.service.UserService;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +31,14 @@ public class UserController {
     public UserResponseDTO get(@AuthenticationPrincipal CustomUserDetails userDetails,
                                @PathVariable Long id){
         return userService.get(id);
+    }
+
+    @PutMapping("/change-password")
+    public ResponseEntity<Void> changePassword(
+            @AuthenticationPrincipal CustomUserDetails userDetails,
+            @Valid @RequestBody ChangePasswordRequest request) {
+        userService.changePassword(userDetails.getId(), request);
+        return ResponseEntity.ok().build();
     }
 
 }
