@@ -14,7 +14,7 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    public final StudentService studentService;
+    private final StudentService studentService;
 
     @GetMapping
     List<StudentResponseDTO> getAll() {

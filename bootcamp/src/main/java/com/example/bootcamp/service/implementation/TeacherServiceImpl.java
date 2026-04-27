@@ -15,9 +15,9 @@ import java.util.List;
 
 @Service
 public class TeacherServiceImpl implements TeacherService {
-    public final TeacherRepository teacherRepository;
-    public final TeacherMapper teacherMapper;
-    public final PasswordEncoder passwordEncoder;
+    private final TeacherRepository teacherRepository;
+    private final TeacherMapper teacherMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public TeacherServiceImpl(TeacherRepository teacherRepository, TeacherMapper teacherMapper, PasswordEncoder passwordEncoder) {
         this.teacherRepository = teacherRepository;
@@ -43,7 +43,8 @@ public class TeacherServiceImpl implements TeacherService {
         teacher.getUser().setPassword(
                 passwordEncoder.encode(teacherRequestDTO.getUser().getPassword())
         );
-        teacherRepository.save(teacher);    }
+        teacherRepository.save(teacher);
+    }
 
     @Override
     public TeacherResponseDTO update(Long id, TeacherRequestDTO dto) {

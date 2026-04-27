@@ -16,11 +16,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthService {
 
-    public final UserRepository userRepository;
-    public final StudentRepository studentRepository;
-    public final TeacherRepository teacherRepository;
-    public final PasswordEncoder passwordEncoder;
-    public final JwtUtil jwtUtil;
+    private final UserRepository userRepository;
+    private final StudentRepository studentRepository;
+    private final TeacherRepository teacherRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
     public AuthResponse register(RegisterRequest request) {
 

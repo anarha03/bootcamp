@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PreparationService {
 
-    List<PreparationResponseDTO>getMyPreparations(Long id);
+    List<PreparationResponseDTO> getMyPreparations(Long id);
 
     void create(PreparationRequestDTO preparationRequestDTO);
 

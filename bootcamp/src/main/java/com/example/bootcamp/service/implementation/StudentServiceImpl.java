@@ -11,11 +11,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class StudentServiceImpl implements StudentService {
-    public final StudentRepository studentRepository;
-    public final StudentMapper studentMapper;
-    public final PasswordEncoder passwordEncoder;
+    private final StudentRepository studentRepository;
+    private final StudentMapper studentMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public StudentServiceImpl(StudentRepository studentRepository, StudentMapper studentMapper, PasswordEncoder passwordEncoder) {
         this.studentRepository = studentRepository;

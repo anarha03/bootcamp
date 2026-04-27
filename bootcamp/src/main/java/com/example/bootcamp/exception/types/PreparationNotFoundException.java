@@ -4,7 +4,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class PreparationNotFoundException extends RuntimeException {
-    public PreparationNotFoundException (String message) {
+    public PreparationNotFoundException(String message) {
         super(message);
     }
 }
