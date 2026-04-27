@@ -3,6 +3,7 @@ package com.example.bootcamp.service.implementation;
 import com.example.bootcamp.dto.request.StudentRequestDTO;
 import com.example.bootcamp.dto.response.StudentResponseDTO;
 import com.example.bootcamp.entity.Student;
+import com.example.bootcamp.exception.types.StudentNotFoundException;
 import com.example.bootcamp.mapper.StudentMapper;
 import com.example.bootcamp.repository.StudentRepository;
 import com.example.bootcamp.service.StudentService;
@@ -29,7 +30,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentResponseDTO get(Long id) {
-        Student student = studentRepository.findById(id).orElseThrow(RuntimeException::new);
+        Student student = studentRepository.findById(id).orElseThrow(StudentNotFoundException::new);
         return studentMapper.entityToResponse(student);
     }
 
@@ -43,13 +44,27 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentResponseDTO update(Long id, StudentRequestDTO studentRequestDTO) {
-        return null;
+    public StudentResponseDTO update(Long id, StudentRequestDTO dto) {
+        Student student = studentRepository.findById(id)
+                .orElseThrow(StudentNotFoundException::new);
+
+        student.setName(dto.getName());
+        student.setGrade(dto.getGrade());
+        student.setNumber(dto.getNumber());
+
+        if (dto.getUser() != null && dto.getUser().getPassword() != null) {
+            student.getUser().setPassword(
+                    passwordEncoder.encode(dto.getUser().getPassword())
+            );
+        }
+
+        studentRepository.save(student);
+        return studentMapper.entityToResponse(student);
     }
 
     @Override
     public StudentResponseDTO delete(Long id) {
-        Student student = studentRepository.findById(id).orElseThrow(RuntimeException::new);
+        Student student = studentRepository.findById(id).orElseThrow(StudentNotFoundException::new);
         studentRepository.delete(student);
         return studentMapper.entityToResponse(student);
     }
