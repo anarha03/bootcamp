@@ -15,6 +15,7 @@ public class StudentRequestDTO {
     String name;
     Integer grade;
     String number;
+    @NotBlank
     UserRequestDTO user;
 
 

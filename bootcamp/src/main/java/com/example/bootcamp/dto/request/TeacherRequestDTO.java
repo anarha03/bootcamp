@@ -18,5 +18,6 @@ public class TeacherRequestDTO {
     String subject;
     String phoneNumber;
     String bio;
+    @NotBlank
     UserRequestDTO user;
 }

@@ -3,6 +3,7 @@ package com.example.bootcamp.dto.request;
 import com.example.bootcamp.entity.TransactionStatus;
 import com.example.bootcamp.entity.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.processing.Exclude;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TransactionRequestDTO {
-
+    @NotBlank
     Double amount;
 
     User sender;

@@ -6,6 +6,7 @@ import com.example.bootcamp.dto.response.StudentResponseDTO;
 import com.example.bootcamp.dto.response.TeacherResponseDTO;
 import com.example.bootcamp.service.StudentService;
 import com.example.bootcamp.service.TeacherService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,12 +30,12 @@ public class TeacherController {
     }
 
     @PostMapping
-    public void createStd(@RequestBody TeacherRequestDTO teacherRequestDTO){
+    public void createStd(@Valid @RequestBody TeacherRequestDTO teacherRequestDTO){
         teacherService.create(teacherRequestDTO);
     }
 
     @PutMapping("/{id}")
-    TeacherResponseDTO update(@PathVariable Long id,@RequestBody TeacherRequestDTO teacherResponseDTO){
+    TeacherResponseDTO update(@PathVariable Long id,@Valid @RequestBody TeacherRequestDTO teacherResponseDTO){
         return teacherService.update(id,teacherResponseDTO);
     }
     @DeleteMapping("/{id}")

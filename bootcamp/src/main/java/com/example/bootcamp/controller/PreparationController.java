@@ -4,6 +4,7 @@ import com.example.bootcamp.dto.request.PreparationRequestDTO;
 import com.example.bootcamp.dto.response.PreparationResponseDTO;
 import com.example.bootcamp.entity.security.CustomUserDetails;
 import com.example.bootcamp.service.PreparationService;
+import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class PreparationController {
 
     @PostMapping
     public void create(@AuthenticationPrincipal CustomUserDetails userDetails,
-                       @RequestBody PreparationRequestDTO preparationRequestDTO) {
+                       @Valid @RequestBody PreparationRequestDTO preparationRequestDTO) {
         preparationService.create(preparationRequestDTO);
     }
 
