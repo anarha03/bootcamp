@@ -1,4 +1,4 @@
-package com.example.bootcamp.configuration;
+package com.example.bootcamp.config;
 
 import com.example.bootcamp.entity.security.JwtAuthFilter;
 import org.springframework.context.annotation.Bean;
@@ -14,11 +14,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 
 @Configuration
-public class SecurityConfiguration {
+public class SecurityConfig {
 
     private final JwtAuthFilter jwtAuthFilter;
 
-    public SecurityConfiguration(JwtAuthFilter jwtAuthFilter) {
+    public SecurityConfig(JwtAuthFilter jwtAuthFilter) {
         this.jwtAuthFilter = jwtAuthFilter;
     }
 
