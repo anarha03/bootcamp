@@ -44,7 +44,7 @@ public class PreparationServiceImpl implements PreparationService {
     public List<PreparationResponseDTO> getMyPreparations(Long id) {
         User user = getUserById(id);
         if (user.getRole().equals(Role.TEACHER)) {
-            Teacher teacher =getTeacherById(id);
+            Teacher teacher = getTeacherById(id);
             List<Preparation> byTeacherId = preparationRepository.findByTeacherId(teacher.getId());
             return byTeacherId.stream().map(preparationMapper::entityToResponse).toList();
         } else {
@@ -68,7 +68,7 @@ public class PreparationServiceImpl implements PreparationService {
 
         Preparation preparation = preparationRepository
                 .findByTeacherIdAndStudentId(teacher.getId(), studentId)
-                .orElseThrow(() -> new PreparationNotFoundException(ResponseCode.PREPARATION_IS_NOT_FOUND, String.format("%s teacher and %s student ids",teacher.getId(),studentId), HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new PreparationNotFoundException(ResponseCode.PREPARATION_IS_NOT_FOUND, String.format("%s teacher and %s student ids", teacher.getId(), studentId), HttpStatus.NOT_FOUND));
 
         PreparationResponseDTO response = preparationMapper.entityToResponse(preparation);
         preparationRepository.delete(preparation);
@@ -82,8 +82,9 @@ public class PreparationServiceImpl implements PreparationService {
     private Teacher getTeacherById(Long id) {
         return teacherRepository.findById(id).orElseThrow(() -> new TeacherNotFoundException(ResponseCode.TEACHER_NOT_FOUND, id, HttpStatus.NOT_FOUND));
     }
-    private User getUserById(Long id){
+
+    private User getUserById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(()->new UserNotFoundException(ResponseCode.USER_IS_NOT_FOUND,id, HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new UserNotFoundException(ResponseCode.USER_IS_NOT_FOUND, id, HttpStatus.NOT_FOUND));
     }
 }

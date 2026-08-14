@@ -3,9 +3,9 @@ package com.example.bootcamp.service.implementation;
 import com.example.bootcamp.dto.request.StudentRequestDTO;
 import com.example.bootcamp.dto.response.StudentResponseDTO;
 import com.example.bootcamp.exception.ResponseCode;
-import com.example.bootcamp.model.entity.Student;
 import com.example.bootcamp.exception.types.StudentNotFoundException;
 import com.example.bootcamp.mapper.StudentMapper;
+import com.example.bootcamp.model.entity.Student;
 import com.example.bootcamp.repository.StudentRepository;
 import com.example.bootcamp.service.StudentService;
 import org.springframework.http.HttpStatus;
@@ -70,7 +70,8 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.delete(student);
         return studentMapper.entityToResponse(student);
     }
-    public Student getById(Long id){
-        return studentRepository.findById(id).orElseThrow(()->new StudentNotFoundException(ResponseCode.STUDENT_NOT_FOUND,id, HttpStatus.NOT_FOUND));
+
+    public Student getById(Long id) {
+        return studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundException(ResponseCode.STUDENT_NOT_FOUND, id, HttpStatus.NOT_FOUND));
     }
 }

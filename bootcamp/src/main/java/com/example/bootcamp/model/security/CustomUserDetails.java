@@ -1,7 +1,7 @@
 package com.example.bootcamp.model.security;
 
-import com.example.bootcamp.model.enums.Role;
 import com.example.bootcamp.model.entity.User;
+import com.example.bootcamp.model.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

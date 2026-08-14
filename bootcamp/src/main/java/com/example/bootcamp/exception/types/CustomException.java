@@ -21,7 +21,8 @@ public class CustomException extends RuntimeException {
         this.responseCode = responseCode;
         this.status = status;
     }
-    public CustomException(ResponseCode responseCode){
+
+    public CustomException(ResponseCode responseCode) {
         super(responseCode.getDescription());
         this.status = HttpStatus.BAD_REQUEST;
 

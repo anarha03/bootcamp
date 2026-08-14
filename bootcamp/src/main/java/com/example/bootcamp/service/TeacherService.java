@@ -1,8 +1,6 @@
 package com.example.bootcamp.service;
 
-import com.example.bootcamp.dto.request.StudentRequestDTO;
 import com.example.bootcamp.dto.request.TeacherRequestDTO;
-import com.example.bootcamp.dto.response.StudentResponseDTO;
 import com.example.bootcamp.dto.response.TeacherResponseDTO;
 
 import java.util.List;

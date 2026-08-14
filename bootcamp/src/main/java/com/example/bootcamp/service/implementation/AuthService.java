@@ -14,20 +14,23 @@ import com.example.bootcamp.model.security.RegisterRequest;
 import com.example.bootcamp.repository.StudentRepository;
 import com.example.bootcamp.repository.TeacherRepository;
 import com.example.bootcamp.repository.UserRepository;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@FieldDefaults(makeFinal = true,level = AccessLevel.PRIVATE)
 public class AuthService {
 
-    private final UserRepository userRepository;
-    private final StudentRepository studentRepository;
-    private final TeacherRepository teacherRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final JwtUtil jwtUtil;
+    UserRepository userRepository;
+    StudentRepository studentRepository;
+    TeacherRepository teacherRepository;
+    PasswordEncoder passwordEncoder;
+    JwtUtil jwtUtil;
 
     public AuthResponse register(RegisterRequest request) {
 
@@ -68,7 +71,7 @@ public class AuthService {
     public AuthResponse login(LoginRequest request) {
 
         User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new UserNotFoundException(ResponseCode.USER_IS_NOT_FOUND,request.getEmail(), HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new UserNotFoundException(ResponseCode.USER_IS_NOT_FOUND, request.getEmail(), HttpStatus.NOT_FOUND));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new CustomException(ResponseCode.PASSWORD_IS_NOT_CORRECT);

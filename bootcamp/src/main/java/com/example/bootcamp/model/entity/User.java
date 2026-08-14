@@ -29,6 +29,6 @@ public class User {
     @Column(nullable = false)
     Role role;
 
-@Builder.Default
-    Double balance=0.0;
+    @Builder.Default
+    Double balance = 0.0;
 }

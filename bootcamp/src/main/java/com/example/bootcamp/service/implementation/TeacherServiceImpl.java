@@ -2,9 +2,9 @@ package com.example.bootcamp.service.implementation;
 
 import com.example.bootcamp.dto.request.TeacherRequestDTO;
 import com.example.bootcamp.dto.response.TeacherResponseDTO;
-import com.example.bootcamp.model.entity.Teacher;
 import com.example.bootcamp.exception.types.TeacherNotFoundException;
 import com.example.bootcamp.mapper.TeacherMapper;
+import com.example.bootcamp.model.entity.Teacher;
 import com.example.bootcamp.repository.TeacherRepository;
 import com.example.bootcamp.service.TeacherService;
 import lombok.RequiredArgsConstructor;

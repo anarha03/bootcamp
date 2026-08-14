@@ -1,7 +1,6 @@
 package com.example.bootcamp.exception.types;
 
 import com.example.bootcamp.exception.ResponseCode;
-import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 public class HaveNotEnoughBalanceException extends CustomException {
