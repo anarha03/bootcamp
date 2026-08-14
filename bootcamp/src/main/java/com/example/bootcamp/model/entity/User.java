@@ -1,5 +1,6 @@
-package com.example.bootcamp.entity;
+package com.example.bootcamp.model.entity;
 
+import com.example.bootcamp.model.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

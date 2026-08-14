@@ -1,4 +1,4 @@
-package com.example.bootcamp.entity.security;
+package com.example.bootcamp.model.security;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

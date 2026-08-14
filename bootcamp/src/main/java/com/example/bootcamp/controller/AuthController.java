@@ -1,8 +1,8 @@
 package com.example.bootcamp.controller;
 
-import com.example.bootcamp.entity.security.AuthResponse;
-import com.example.bootcamp.entity.security.LoginRequest;
-import com.example.bootcamp.entity.security.RegisterRequest;
+import com.example.bootcamp.model.security.AuthResponse;
+import com.example.bootcamp.model.security.LoginRequest;
+import com.example.bootcamp.model.security.RegisterRequest;
 import com.example.bootcamp.service.implementation.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.example.bootcamp.repository;
 
-import com.example.bootcamp.entity.Transaction;
+import com.example.bootcamp.model.entity.Transaction;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 

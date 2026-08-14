@@ -1,7 +1,7 @@
 package com.example.bootcamp.controller;
 
 import com.example.bootcamp.dto.response.TransactionResponseDTO;
-import com.example.bootcamp.entity.security.CustomUserDetails;
+import com.example.bootcamp.model.security.CustomUserDetails;
 import com.example.bootcamp.service.TransactionService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;

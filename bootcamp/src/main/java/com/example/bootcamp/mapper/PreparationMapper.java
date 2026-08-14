@@ -2,7 +2,7 @@ package com.example.bootcamp.mapper;
 
 import com.example.bootcamp.dto.request.PreparationRequestDTO;
 import com.example.bootcamp.dto.response.PreparationResponseDTO;
-import com.example.bootcamp.entity.Preparation;
+import com.example.bootcamp.model.entity.Preparation;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

@@ -1,6 +1,6 @@
 package com.example.bootcamp.dto.request;
 
-import com.example.bootcamp.entity.Role;
+import com.example.bootcamp.model.enums.Role;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

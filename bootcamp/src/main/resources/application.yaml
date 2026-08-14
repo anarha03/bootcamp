@@ -13,3 +13,5 @@ spring:
     show-sql: true
 jwt:
   secret: my-super-secret-key-min-32-characters-long
+server:
+  port: 8080

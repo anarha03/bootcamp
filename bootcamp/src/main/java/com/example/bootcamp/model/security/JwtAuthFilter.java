@@ -1,6 +1,6 @@
-package com.example.bootcamp.entity.security;
+package com.example.bootcamp.model.security;
 
-import com.example.bootcamp.entity.User;
+import com.example.bootcamp.model.entity.User;
 import com.example.bootcamp.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

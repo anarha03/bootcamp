@@ -1,6 +1,6 @@
 package com.example.bootcamp.configuration;
 
-import com.example.bootcamp.entity.security.JwtAuthFilter;
+import com.example.bootcamp.model.security.JwtAuthFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

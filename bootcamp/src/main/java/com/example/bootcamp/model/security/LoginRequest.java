@@ -1,6 +1,5 @@
-package com.example.bootcamp.entity.security;
+package com.example.bootcamp.model.security;
 
-import com.example.bootcamp.entity.Role;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -8,17 +7,9 @@ import lombok.experimental.FieldDefaults;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RegisterRequest {
+public class LoginRequest {
     @NotBlank
     String email;
     @NotBlank
     String password;
-    @NotBlank
-    Role role;
-    @NotBlank
-    String name;
-
-    String subject;
-    Integer grade;
-    String number;
 }

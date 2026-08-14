@@ -2,7 +2,7 @@ package com.example.bootcamp.controller;
 
 import com.example.bootcamp.dto.request.PreparationRequestDTO;
 import com.example.bootcamp.dto.response.PreparationResponseDTO;
-import com.example.bootcamp.entity.security.CustomUserDetails;
+import com.example.bootcamp.model.security.CustomUserDetails;
 import com.example.bootcamp.service.PreparationService;
 import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

@@ -1,24 +1,30 @@
 package com.example.bootcamp.service.implementation;
 
 import com.example.bootcamp.dto.response.TransactionResponseDTO;
-import com.example.bootcamp.entity.*;
+import com.example.bootcamp.exception.ResponseCode;
 import com.example.bootcamp.exception.types.HaveNotEnoughBalanceException;
 import com.example.bootcamp.exception.types.StudentNotFoundException;
 import com.example.bootcamp.exception.types.TeacherNotFoundException;
 import com.example.bootcamp.exception.types.UserNotFoundException;
+import com.example.bootcamp.model.entity.Student;
+import com.example.bootcamp.model.entity.Teacher;
+import com.example.bootcamp.model.entity.Transaction;
+import com.example.bootcamp.model.entity.User;
+import com.example.bootcamp.model.enums.TransactionStatus;
 import com.example.bootcamp.repository.StudentRepository;
 import com.example.bootcamp.repository.TeacherRepository;
 import com.example.bootcamp.repository.TransactionRepository;
 import com.example.bootcamp.repository.UserRepository;
 import com.example.bootcamp.service.TransactionService;
 import jakarta.transaction.Transactional;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.example.bootcamp.entity.TransactionStatus.INCOME;
-import static com.example.bootcamp.entity.TransactionStatus.OUTCOME;
+import static com.example.bootcamp.model.enums.TransactionStatus.INCOME;
+import static com.example.bootcamp.model.enums.TransactionStatus.OUTCOME;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
@@ -45,11 +51,11 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     @Transactional
     public void paymentToTeacher(Long studentUserId, Long teacherId, Double amount) {
-        Student student = studentRepository.findByUserId(studentUserId).orElseThrow(StudentNotFoundException::new);
+        Student student = getStudentById(studentUserId);
         if (student.getUser().getBalance() < amount) {
-            throw new HaveNotEnoughBalanceException("Balansinizda kifayet qeder vesait yoxdur!");
+            throw new HaveNotEnoughBalanceException(ResponseCode.BALANCE_IS_NOT_ENOUGH,student.getUser().getBalance());
         }
-        Teacher teacher = teacherRepository.findById(teacherId).orElseThrow(TeacherNotFoundException::new);
+        Teacher teacher = getTeacherById(teacherId);
         teacher.getUser().setBalance(teacher.getUser().getBalance() + amount);
         student.getUser().setBalance(student.getUser().getBalance() - amount);
         transactionRepository.save(Transaction.builder()
@@ -66,7 +72,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     @Transactional
     public void topUp(Long id, Double amount) {
-        User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+        User user = getUserById(id);
         user.setBalance(user.getBalance() + amount);
         Transaction topUp = Transaction.builder()
                 .amount(amount)
@@ -82,9 +88,9 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     @Transactional
     public void withdraw(Long id, Double amount) {
-        User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+        User user = getUserById(id);
         if (user.getBalance() < amount) {
-            throw new HaveNotEnoughBalanceException();
+            throw new HaveNotEnoughBalanceException(ResponseCode.BALANCE_IS_NOT_ENOUGH,user.getBalance());
         }
         user.setBalance(user.getBalance() - amount);
         Transaction withdraw = Transaction.builder()
@@ -121,5 +127,16 @@ public class TransactionServiceImpl implements TransactionService {
                 .createdAt(t.getCreatedAt())
                 .build();
 
+    }
+    private Student getStudentById(Long id) {
+        return studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundException(ResponseCode.STUDENT_NOT_FOUND, id, HttpStatus.NOT_FOUND));
+    }
+
+    private Teacher getTeacherById(Long id) {
+        return teacherRepository.findById(id).orElseThrow(() -> new TeacherNotFoundException(ResponseCode.TEACHER_NOT_FOUND, id, HttpStatus.NOT_FOUND));
+    }
+    private User getUserById(Long id){
+        return userRepository.findById(id)
+                .orElseThrow(()->new UserNotFoundException(ResponseCode.USER_IS_NOT_FOUND,id, HttpStatus.NOT_FOUND));
     }
 }

@@ -1,8 +1,7 @@
 package com.example.bootcamp.service;
 
 import com.example.bootcamp.dto.response.UserResponseDTO;
-import com.example.bootcamp.entity.ChangePasswordRequest;
-import jakarta.validation.Valid;
+import com.example.bootcamp.model.request.ChangePasswordRequest;
 
 import java.util.List;
 

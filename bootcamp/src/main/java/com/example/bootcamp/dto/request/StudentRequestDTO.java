@@ -1,6 +1,5 @@
 package com.example.bootcamp.dto.request;
 
-import com.example.bootcamp.entity.User;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

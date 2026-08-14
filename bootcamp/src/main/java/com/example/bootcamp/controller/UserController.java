@@ -1,8 +1,8 @@
 package com.example.bootcamp.controller;
 
 import com.example.bootcamp.dto.response.UserResponseDTO;
-import com.example.bootcamp.entity.ChangePasswordRequest;
-import com.example.bootcamp.entity.security.CustomUserDetails;
+import com.example.bootcamp.model.request.ChangePasswordRequest;
+import com.example.bootcamp.model.security.CustomUserDetails;
 import com.example.bootcamp.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

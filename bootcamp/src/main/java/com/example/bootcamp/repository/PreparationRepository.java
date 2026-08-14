@@ -1,6 +1,6 @@
 package com.example.bootcamp.repository;
 
-import com.example.bootcamp.entity.Preparation;
+import com.example.bootcamp.model.entity.Preparation;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

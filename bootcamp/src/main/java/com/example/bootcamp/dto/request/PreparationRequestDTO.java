@@ -1,8 +1,6 @@
 package com.example.bootcamp.dto.request;
 
-import com.example.bootcamp.entity.PreparationStatus;
-import com.example.bootcamp.entity.Student;
-import com.example.bootcamp.entity.Teacher;
+import com.example.bootcamp.model.enums.PreparationStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

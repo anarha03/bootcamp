@@ -1,12 +1,11 @@
 package com.example.bootcamp.dto.request;
 
-import com.example.bootcamp.entity.TransactionStatus;
-import com.example.bootcamp.entity.User;
+import com.example.bootcamp.model.enums.TransactionStatus;
+import com.example.bootcamp.model.entity.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.processing.Exclude;
 
 import java.time.LocalDateTime;
 

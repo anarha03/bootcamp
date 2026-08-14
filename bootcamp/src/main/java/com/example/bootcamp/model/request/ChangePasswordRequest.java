@@ -1,4 +1,4 @@
-package com.example.bootcamp.entity;
+package com.example.bootcamp.model.request;
 
 import lombok.AccessLevel;
 import lombok.Data;

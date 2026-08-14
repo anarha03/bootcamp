@@ -1,14 +1,21 @@
 package com.example.bootcamp.service.implementation;
 
-import com.example.bootcamp.entity.*;
-import com.example.bootcamp.entity.security.AuthResponse;
-import com.example.bootcamp.entity.security.JwtUtil;
-import com.example.bootcamp.entity.security.LoginRequest;
-import com.example.bootcamp.entity.security.RegisterRequest;
+import com.example.bootcamp.exception.ResponseCode;
+import com.example.bootcamp.exception.types.CustomException;
+import com.example.bootcamp.exception.types.UserNotFoundException;
+import com.example.bootcamp.model.entity.Student;
+import com.example.bootcamp.model.entity.Teacher;
+import com.example.bootcamp.model.entity.User;
+import com.example.bootcamp.model.enums.Role;
+import com.example.bootcamp.model.security.AuthResponse;
+import com.example.bootcamp.model.security.JwtUtil;
+import com.example.bootcamp.model.security.LoginRequest;
+import com.example.bootcamp.model.security.RegisterRequest;
 import com.example.bootcamp.repository.StudentRepository;
 import com.example.bootcamp.repository.TeacherRepository;
 import com.example.bootcamp.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -61,10 +68,10 @@ public class AuthService {
     public AuthResponse login(LoginRequest request) {
 
         User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("Email və ya şifrə yanlışdır"));
+                .orElseThrow(() -> new UserNotFoundException(ResponseCode.USER_IS_NOT_FOUND,request.getEmail(), HttpStatus.NOT_FOUND));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new RuntimeException("Email və ya şifrə yanlışdır");
+            throw new CustomException(ResponseCode.PASSWORD_IS_NOT_CORRECT);
         }
 
         String token = jwtUtil.generateToken(user.getId(), user.getEmail());

@@ -1,4 +1,4 @@
-package com.example.bootcamp.entity.security;
+package com.example.bootcamp.model.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;

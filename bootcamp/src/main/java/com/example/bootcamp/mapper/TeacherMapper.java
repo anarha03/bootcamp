@@ -2,7 +2,7 @@ package com.example.bootcamp.mapper;
 
 import com.example.bootcamp.dto.request.TeacherRequestDTO;
 import com.example.bootcamp.dto.response.TeacherResponseDTO;
-import com.example.bootcamp.entity.Teacher;
+import com.example.bootcamp.model.entity.Teacher;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

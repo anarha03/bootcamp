@@ -1,17 +1,12 @@
 package com.example.bootcamp.dto.response;
 
-import com.example.bootcamp.entity.PreparationStatus;
-import com.example.bootcamp.entity.Student;
-import com.example.bootcamp.entity.Teacher;
+import com.example.bootcamp.model.enums.PreparationStatus;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.DayOfWeek;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data

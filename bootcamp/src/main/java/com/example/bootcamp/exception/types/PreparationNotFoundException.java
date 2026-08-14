@@ -1,10 +1,15 @@
 package com.example.bootcamp.exception.types;
 
+import com.example.bootcamp.exception.ResponseCode;
 import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatus;
 
-@NoArgsConstructor
-public class PreparationNotFoundException extends RuntimeException {
-    public PreparationNotFoundException(String message) {
-        super(message);
+public class PreparationNotFoundException extends CustomException {
+    public PreparationNotFoundException(ResponseCode responseCode, Object parameter) {
+        super(responseCode, parameter);
+    }
+
+    public PreparationNotFoundException(ResponseCode responseCode, Object parameter, HttpStatus status) {
+        super(responseCode, parameter, status);
     }
 }

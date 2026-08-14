@@ -1,6 +1,6 @@
 package com.example.bootcamp.dto.response;
 
-import com.example.bootcamp.entity.Role;
+import com.example.bootcamp.model.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

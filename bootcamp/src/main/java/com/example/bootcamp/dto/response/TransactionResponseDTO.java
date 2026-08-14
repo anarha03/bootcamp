@@ -1,7 +1,6 @@
 package com.example.bootcamp.dto.response;
 
-import com.example.bootcamp.entity.TransactionStatus;
-import com.example.bootcamp.entity.User;
+import com.example.bootcamp.model.enums.TransactionStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
